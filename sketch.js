@@ -3,16 +3,18 @@ let generation = 1;
 let walls = [];
 let population;
 let mutation_rate = 0.01;
+let drawing = false;
+
+let startPos;
+let endPos;
 
 function setup(){
     // Create canvas
     createCanvas(400, 400);
 
-    walls[0] = new Wall(50, 50, 20, 300);
-    walls[1] = new Wall(width-70, 50, 20, 300);
-    walls[2] = new Wall(100, 200, 200, 20);
-
     population = new Population(100);
+    startPos = createVector(0, 0);
+    endPos = createVector(0, 0);
 }
 
 function draw(){
@@ -22,6 +24,15 @@ function draw(){
     walls.forEach(wall => {
         wall.show();
     })
+
+    // Draw Walls
+    if(drawing){
+        push();
+        noStroke();
+        fill(0);
+        rect(mouseX, mouseY, startPos.x - mouseX, startPos.y - mouseY);
+        pop();
+    }
 
     // Update and show
     population.update();
@@ -43,5 +54,14 @@ function draw(){
     fill(255, 50);
     text("Generation : " + generation, width/2, 40);
     pop();
+}
 
+function mousePressed(){
+    drawing = !drawing;
+    if (drawing){
+        startPos.set(mouseX, mouseY);
+    }else{
+        endPos.set(mouseX - startPos.x, mouseY - startPos.y);
+        walls[walls.length] = new Wall(startPos.x, startPos.y, endPos.x, endPos.y);
+    }
 }
