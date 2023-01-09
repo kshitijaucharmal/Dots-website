@@ -13,7 +13,7 @@ class Population{
     update(){
         // Update if not dead
         this.population.forEach(dot => {
-            if (!dot.dead) dot.update();
+            if (!dot.dead) dot.update(this.target);
         });
     }
 
@@ -57,10 +57,10 @@ class Population{
     show(){
         // Show Target
         push();
-        stroke(0);
-        strokeWeight(2);
-        fill(255, 0, 0);
-        circle(this.target.x, this.target.y, 8);
+        stroke(255, 0, 0);
+        strokeWeight(4);
+        noFill();
+        circle(this.target.x, this.target.y, 16);
         pop();
 
         // Show Population

@@ -1,6 +1,6 @@
 class Dot{
     constructor(){
-        this.size = 4;
+        this.size = 5;
         this.speed = 0.8;
         this.lifetime = 5 * 60;
         this.ctr = 0;
@@ -19,11 +19,14 @@ class Dot{
     }
 
     show(){
-        noStroke();
+        push();
+        fill(255);
+        stroke(0, 255, 0);
         circle(this.pos.x, this.pos.y, this.size);
+        pop();
     }
 
-    update(){
+    update(target){
         this.acc = this.genes[this.ctr++];
         this.vel.add(this.acc);
         this.vel.limit(10);
@@ -34,6 +37,12 @@ class Dot{
             this.dead = true;
         }
         if (this.ctr >= this.lifetime){
+            this.dead = true;
+        }
+        
+        let x = target.x - this.pos.x;
+        let y = target.y - this.pos.y;
+        if ((x*x + y*y) < (10*10)){
             this.dead = true;
         }
     }

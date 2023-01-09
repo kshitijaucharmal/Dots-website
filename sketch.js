@@ -12,13 +12,13 @@ function setup(){
     // Create canvas
     createCanvas(400, 400);
 
-    population = new Population(100);
+    population = new Population(500);
     startPos = createVector(0, 0);
     endPos = createVector(0, 0);
 }
 
 function draw(){
-    background(51);
+    background(11);
 
     // Show Walls
     walls.forEach(wall => {
@@ -28,8 +28,9 @@ function draw(){
     // Draw Walls
     if(drawing){
         push();
-        noStroke();
-        fill(0);
+        strokeWeight(4);
+        stroke(255);
+        noFill();
         rect(mouseX, mouseY, startPos.x - mouseX, startPos.y - mouseY);
         pop();
     }
@@ -54,6 +55,10 @@ function draw(){
     fill(255, 50);
     text("Generation : " + generation, width/2, 40);
     pop();
+
+    // Help Text
+    push();
+    text("Tap Once to start drawing, tap again to stop", )
 }
 
 function mousePressed(){

@@ -8,8 +8,9 @@ class Wall{
 
     show(){
         push();
-        noStroke();
-        fill(0);
+        strokeWeight(4);
+        stroke(255);
+        noFill();
         rect(this.x, this.y, this.w, this.h);
         pop();
     }
